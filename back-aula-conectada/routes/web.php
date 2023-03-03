@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CicloController;
+use App\Http\Controllers\PerfilesMonitorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//RUTAS CICLOS
+Route::resource('ciclos',CicloController::class);
 
-Route::resource('user',g
+//RUTAS PERFILES_MONITOR
+Route::resource('perfiles-monitor',PerfilesMonitorController::class);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
