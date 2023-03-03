@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('siglas',5);
-        
+            
 
         });
     }
