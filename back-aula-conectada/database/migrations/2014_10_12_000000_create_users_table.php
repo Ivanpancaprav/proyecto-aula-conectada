@@ -15,14 +15,13 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('password');
             $table->string('apellido1');
             $table->string('apellido2')->nullable();
             $table->enum('role',['administrador','profesor','alumno'])->default('alumno');
-            $table->string('NIA')->unique()->nullable();
-            
-            $table->string('password');
+            $table->enum('tipo_documento',['NIA','DNI'])->default('NIA');
+            $table->string('num_documento')->unique();
 
-            
         });
     }
 

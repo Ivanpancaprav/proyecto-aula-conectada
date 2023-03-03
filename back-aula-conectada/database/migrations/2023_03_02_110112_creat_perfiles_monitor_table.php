@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perfiles_monitores', function (Blueprint $table) {
-          
+        Schema::create('perfiles_monitor', function (Blueprint $table) {
+
             $table->increments('id');
             $table->string('nombre');
             $table->integer('FC');
