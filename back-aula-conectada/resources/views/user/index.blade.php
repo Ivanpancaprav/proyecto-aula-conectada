@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('User') }}
+                                {{ __( $tipo ) }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('users.create',"profesor") }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('users.create',$tipo) }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $users->links() !!}
+                {{-- {!! $users->links() !!} --}}
             </div>
         </div>
     </div>
