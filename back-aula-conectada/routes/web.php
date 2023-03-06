@@ -4,6 +4,7 @@ use App\Http\Controllers\CicloController;
 use App\Http\Controllers\PerfilesMonitorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //RUTAS CICLOS
 Route::resource('ciclos',CicloController::class);

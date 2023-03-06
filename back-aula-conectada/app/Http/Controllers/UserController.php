@@ -11,25 +11,29 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index($tipo)
     {
-        dd($tipo);
-        $users = User::paginate();
+        // dd($tipo);
 
-        return view('user.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        $users = 0;
+
+        if( $tipo == 'profesor' ){
+            $users = User::where('role','profesor')->get();
+        }
+        else if ( $tipo == 'alumno' ) {
+            $users = User::where('role','alumno')->get();
+        }
+        else{
+            $users = User::all();
+        }
+
+        // dd($user);
+        // $users = User::paginate();
+
+        return view('user.index', compact('users'))->with('i', 1);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($tipo)
     {
         dd($tipo);
@@ -37,12 +41,6 @@ class UserController extends Controller
         return view('user.create', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate(User::$rules);
@@ -53,12 +51,6 @@ class UserController extends Controller
             ->with('success', 'User created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = User::find($id);
@@ -66,12 +58,6 @@ class UserController extends Controller
         return view('user.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::find($id);
@@ -79,13 +65,6 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  User $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         request()->validate(User::$rules);
@@ -96,11 +75,6 @@ class UserController extends Controller
             ->with('success', 'User updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
         $user = User::find($id)->delete();

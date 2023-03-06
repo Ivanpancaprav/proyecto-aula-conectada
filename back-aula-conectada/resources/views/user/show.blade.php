@@ -11,15 +11,20 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show User</span>
+                            <span class="card-title">DETALLES  {{ Str::upper( $user->role ) }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                            {{-- @if ()
+
+                            @else
+
+                            @endif --}}
+                            <a class="btn btn-primary" href="{{ route('users.index',$user->role ) }}"> Back</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $user->name }}

@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $users->links() !!}
+                {{-- {!! $users->links() !!} --}}
             </div>
         </div>
     </div>
