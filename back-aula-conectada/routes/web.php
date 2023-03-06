@@ -3,6 +3,8 @@
 use App\Http\Controllers\CicloController;
 use App\Http\Controllers\PerfilesMonitorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //RUTAS CICLOS
 Route::resource('ciclos',CicloController::class);
 
@@ -22,7 +28,9 @@ Route::resource('ciclos',CicloController::class);
 Route::resource('perfiles-monitor',PerfilesMonitorController::class);
 
 
-Auth::routes();
+// RUTAS - USERS
+// Route::resource('users', UserController::class)->except(['create']);
+Route::get("/users/create/{tipo}",[UserController::class, 'create'])->name('users.create');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::resource('users', UserController::class)->except(['create', 'index']);
+Route::get("/index/{tipo}",[UserController::class, 'index'])->name('users.index');
