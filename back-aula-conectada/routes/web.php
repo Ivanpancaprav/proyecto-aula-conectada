@@ -31,7 +31,6 @@ Route::resource('perfiles-monitor',PerfilesMonitorController::class);
 
 // RUTAS - USERS
 // Route::resource('users', UserController::class)->except(['create']);
-Route::get("/users/create/{tipo}",[UserController::class, 'create'])->name('users.create');
-
 Route::resource('users', UserController::class)->except(['create', 'index']);
 Route::get("/index/{tipo}",[UserController::class, 'index'])->name('users.index');
+Route::get("/users/create/{tipo}",[UserController::class, 'create'])->name('users.create');
