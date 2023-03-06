@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perfil_Monitor;
-use App\Models\PerfilesMonitor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
  * Class PerfilesMonitorController
  * @package App\Http\Controllers
  */
-class PerfilesMonitorController extends Controller
-{
+class PerfilesMonitorController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         $perfilesMonitors = Perfil_Monitor::paginate();
 
         return view('perfiles-monitor.index', compact('perfilesMonitors'))
@@ -33,7 +31,8 @@ class PerfilesMonitorController extends Controller
     public function create()
     {
         $perfilesMonitor = new Perfil_Monitor();
-        return view('perfiles-monitor.create', compact('perfilesMonitor'));
+      
+        return view('perfiles-monitor.create', compact('perfilesMonitor',));
     }
 
     /**
@@ -42,14 +41,22 @@ class PerfilesMonitorController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        request()->validate(Perfil_Monitor::$rules);
+    public function store(Request $request){
 
-        $perfilesMonitor = Perfil_Monitor::create($request->all());
+      $validacion = $request->validate([
+        'nombre'=>'required',
+        'FC'=>'required|numeric|integer',
+        'CO2'=>'required|numeric|integer',
+        'TA_D'=>'required|numeric|integer',
+        'TA_S'=>'required|numeric|integer' ,
+        'SATO2'=>'required|numeric|integer',
+        'id_user'=>'required']);
+    
+      Perfil_Monitor::create($validacion);
 
-        return redirect()->route('perfiles-monitors.index')
+        return redirect()->route('perfiles-monitor.index')
             ->with('success', 'PerfilesMonitor created successfully.');
+    
     }
 
     /**
@@ -87,12 +94,20 @@ class PerfilesMonitorController extends Controller
      */
     public function update(Request $request, Perfil_Monitor $perfilesMonitor)
     {
-        request()->validate(Perfil_Monitor::$rules);
+        $validacion = $request->validate([
+        'nombre'=>'required',
+        'FC'=>'required|numeric',
+        'CO2'=>'required|numeric',
+        'TA_D'=>'required|numeric',
+        'TA_S'=>'required|numeric',
+        'SATO2'=>'required|numeric',
+        'id_user'=>'required'
+    ]);
 
-        $perfilesMonitor->update($request->all());
+        $perfilesMonitor->update($validacion);
 
-        return redirect()->route('perfiles-monitors.index')
-            ->with('success', 'PerfilesMonitor updated successfully');
+        return redirect()->route('perfiles-monitor.index')
+            ->with('success', 'PerfilesMonitor actualizado');
     }
 
     /**
@@ -104,7 +119,7 @@ class PerfilesMonitorController extends Controller
     {
         $perfilesMonitor = Perfil_Monitor::find($id)->delete();
 
-        return redirect()->route('perfiles-monitors.index')
-            ->with('success', 'PerfilesMonitor deleted successfully');
+        return redirect()->route('perfiles-monitor.index')
+            ->with('success', 'Perfil monitor borrado');
     }
 }

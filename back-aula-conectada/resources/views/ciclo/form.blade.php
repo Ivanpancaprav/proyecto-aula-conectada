@@ -1,3 +1,5 @@
+@vite(['resources/css/styles.css', 'resources/js/app.js'])
+
 <div class="box box-info padding-1">
     <div class="box-body">
         

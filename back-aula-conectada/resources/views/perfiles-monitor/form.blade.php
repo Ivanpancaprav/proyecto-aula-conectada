@@ -31,14 +31,13 @@
             {{ Form::text('SATO2', $perfilesMonitor->SATO2, ['class' => 'form-control item' . ($errors->has('SATO2') ? ' is-invalid' : ''), 'placeholder' => 'Sato2']) }}
             {!! $errors->first('SATO2', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+    
         <div class="form-group">
-            {{ Form::label('id_user') }}
-            {{ Form::text('id_user', $perfilesMonitor->id_user, ['class' => 'form-control item' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Id User']) }}
-            {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
+             <input type="hidden" name="id_user" value="0">
         </div>
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-block create-account">Submit</button>
+        <button type="submit" class="btn btn-block bg-success create-account">Enviar</button>
     </div>
 </div>

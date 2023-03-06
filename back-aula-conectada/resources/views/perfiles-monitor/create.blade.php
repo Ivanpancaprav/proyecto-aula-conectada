@@ -29,11 +29,10 @@
             @csrf
 
             @include('perfiles-monitor.form')
-         
+            
         </form>
         <div class="social-media">
             <h5>Sign up with social media</h5>
-          
         </div>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

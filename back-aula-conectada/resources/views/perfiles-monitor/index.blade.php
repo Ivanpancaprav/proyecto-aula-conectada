@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-7">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -18,7 +18,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('perfiles-monitor.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Crear nuevo monitor') }}
                                 </a>
                               </div>
                         </div>
@@ -36,14 +36,9 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Nombre</th>
-										<th>Fc</th>
-										<th>Co2</th>
-										<th>Ta D</th>
-										<th>Ta S</th>
-										<th>Sato2</th>
-										<th>Id User</th>
-
+										<th>Nombre Monitor</th>
+										<th>Nombre Profesor</th>
+                                        <th>Correo Profesor</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -51,22 +46,18 @@
                                     @foreach ($perfilesMonitors as $perfilesMonitor)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
 											<td>{{ $perfilesMonitor->nombre }}</td>
-											<td>{{ $perfilesMonitor->FC }}</td>
-											<td>{{ $perfilesMonitor->CO2 }}</td>
-											<td>{{ $perfilesMonitor->TA_D }}</td>
-											<td>{{ $perfilesMonitor->TA_S }}</td>
-											<td>{{ $perfilesMonitor->SATO2 }}</td>
-											<td>{{ $perfilesMonitor->id_user }}</td>
+                                            <td>{{ $perfilesMonitor->usuario->name }}</td>
+											<td>{{ $perfilesMonitor->usuario->email }}</td>
 
                                             <td>
                                                 <form action="{{ route('perfiles-monitor.destroy',$perfilesMonitor->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('perfiles-monitor.show',$perfilesMonitor->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('perfiles-monitor.edit',$perfilesMonitor->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('perfiles-monitor.show',$perfilesMonitor->id) }}"><i class="bi bi-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('perfiles-monitor.edit',$perfilesMonitor->id) }}"><i class="bi bi-pencil-square"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

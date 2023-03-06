@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ciclos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('siglas',5);
+            $table->string('siglas',8);
             
 
         });
