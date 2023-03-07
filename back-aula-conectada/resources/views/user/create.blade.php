@@ -47,11 +47,23 @@
                                         <input type="text" name="apellido2" class='form-control{{($errors->has('apellido2') ? ' is-invalid' : '')}}' value="{{ old('apellido2') }}">
                                         {!! $errors->first('apellido2', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label>Email</label>
                                         <input type="text" name="email" class='form-control{{($errors->has('email') ? ' is-invalid' : '')}}' value="{{ old('email') }}">
                                         {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div> --}}
+
+                                    <label>Email</label>
+                                    <div class="form-group input-group">                                        
+                                        <input type="text" name="email" class='form-control{{($errors->has('email') ? ' is-invalid' : '')}}' value="{{ old('email') }}">
+                                        <div class="input-group-append">
+                                          <span class="input-group-text">{{$extension_email}}</span>
+                                        </div>
+                                        {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
+
+
+
 
                                     @if ( $tipo == 'alumno' )
                                         {{-- USUARIO ALUMNO --}}
@@ -102,7 +114,7 @@
                                             <label class="form-label">Ciclos</label>
                                             <div class="multiselect ">
                                                 <div class="selectBox" onclick="showCheckboxes()">
-                                                    <select class="form-control{{($errors->has('email') ? ' is-invalid' : '')}} form-select">
+                                                    <select class="form-control{{($errors->has('ciclos') ? ' is-invalid' : '')}} form-select">
                                                         <option>Opciones</option>
                                                     </select>
                                                     
@@ -131,7 +143,6 @@
                                         {!! $errors->first('role', '<small>:message</small><br>' )!!}
 
                                     @endif
-
 
                                 </div>
                                 <br>

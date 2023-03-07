@@ -42,6 +42,7 @@
 
                                         @if ( $tipo == 'alumno')
                                             <th>NIA</th>
+                                            <th>Ciclo</th>
                                         @else {{-- Profesor/Administrador --}}                        
                                             <th>Admin</th>
                                             <th>DNI</th>
@@ -60,6 +61,8 @@
 
                                             @if ( $tipo == 'alumno')
                                                 <td>{{ $user->num_documento }}</td>
+                                                <td>{{ $user->ciclos[0]->siglas }}</td>
+
                                             @else       
                                             
                                                 @if ($user->role == 'administrador')
