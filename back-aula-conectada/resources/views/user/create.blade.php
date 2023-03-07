@@ -84,27 +84,7 @@
                                         </div>
 
                                     @else
-                                        {{-- USUARIO PROFESOR / ADMINISTRADOR --}}
-                                        {{-- <input type="hidden" name="role" value="alumno"> --}}
-                                        {{-- <label>Role:</label><br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="profesor">
-                                            <label class="form-check-label" for="inlineRadio1">Profesor</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="administrador">
-                                            <label class="form-check-label" for="inlineRadio2">Administrador</label>
-                                        </div>
-                                        {!! $errors->first('role', '<small>:message</small><br>' )!!} --}}
-
-                                        {{-- En caso de que no lo pulse, sigue deshabilitado --}}
-                                        <input type="hidden" name="role" value="profesor">
-                                        {{-- Si pulsa, el usuario es robinson --}}
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="robinson" value="adimnistrador">
-                                            <label class="form-check-label">Administrador</label>
-                                        </div>
-                                        {!! $errors->first('role', '<small>:message</small><br>' )!!}
+                                        {{-- USUARIO PROFESOR / ADMINISTRADOR --}}                                        
 
                                         <input type="hidden" name="tipo_documento" value="DNI">
 
@@ -117,21 +97,6 @@
                                             title=" Debe poner 8 números y 1 letra">
                                             {!! $errors->first('num_documento', '<div class="invalid-feedback">:message</div>') !!}
                                         </div>
-
-                                        {{-- <div class="form-group">
-                                            <label class="form-label">Ciclo</label>
-                                            <select class='form-control{{($errors->has('email') ? ' is-invalid' : '')}} form-select' name="ciclos" >
-                                                <option value="">**Ciclos**</option>
-                                                @foreach ($ciclos as $ciclo)
-                                                    @if ($ciclo->id == old('ciclos') )
-                                                        <option selected value="{{$ciclo->id}}">{{$ciclo->siglas}} - {{$ciclo->nombre}}</option>
-                                                    @else
-                                                        <option value="{{$ciclo->id}}"> {{$ciclo->siglas}} - {{$ciclo->nombre}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                            {!! $errors->first('ciclos', '<div class="invalid-feedback">:message</div>') !!}
-                                        </div> --}}
 
                                         <div class="form-group">
                                             <label class="form-label">Ciclos</label>
@@ -154,7 +119,17 @@
                                             <div style="color: #dc3545">
                                                 {!! $errors->first('ciclos', '<small>:message</small><br>' )!!}
                                             </div>
+                                        </div> <br>
+
+                                        {{-- En caso de que no lo pulse, sigue deshabilitado --}}
+                                        <input type="hidden" name="role" value="profesor">
+                                        {{-- Si pulsa, el usuario es robinson --}}
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="role" value="administrador">
+                                            <label class="form-check-label">Administrador</label>
                                         </div>
+                                        {!! $errors->first('role', '<small>:message</small><br>' )!!}
+
                                     @endif
 
 
