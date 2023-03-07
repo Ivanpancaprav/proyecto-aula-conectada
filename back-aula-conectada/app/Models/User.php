@@ -32,7 +32,7 @@ class User extends Authenticatable
     ];
 
     public function ciclos() {
-        return $this->belongsToMany(Ciclo::class, 'ciclos_usuarios',"id_ciclo", "id_user");
+        return $this->belongsToMany(Ciclo::class, 'ciclos_usuarios', "id_user","id_ciclo");
     }
 
     public function monitor(){

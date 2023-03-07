@@ -36,14 +36,16 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Name</th>
+										<th>Nombre</th>
+										<th>Apellidos</th>
 										<th>Email</th>
-										<th>Apellido1</th>
-										<th>Apellido2</th>
-										<th>Role</th>
-										<th>Tipo Documento</th>
-										<th>Num Documento</th>
 
+                                        @if ( $tipo == 'alumno')
+                                            <th>NIA</th>
+                                        @else {{-- Profesor/Administrador --}}                        
+                                            <th>Admin</th>
+                                            <th>DNI</th>
+                                        @endif
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -53,20 +55,30 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $user->name }}</td>
+											<td>{{ $user->apellido1 }} {{ $user->apellido2 }}</td>
 											<td>{{ $user->email }}</td>
-											<td>{{ $user->apellido1 }}</td>
-											<td>{{ $user->apellido2 }}</td>
-											<td>{{ $user->role }}</td>
-											<td>{{ $user->tipo_documento }}</td>
-											<td>{{ $user->num_documento }}</td>
+
+                                            @if ( $tipo == 'alumno')
+                                                <td>{{ $user->num_documento }}</td>
+                                            @else       
+                                            
+                                                @if ($user->role == 'administrador')
+                                                    <td><i class="bi bi-check-square-fill" style="color: green"><a
+                                                                style="visibility: hidden">1</a></td>
+                                                @else
+                                                    <td><i class="bi bi-x-square-fill" style="color: red"> <a
+                                                                style="visibility: hidden">0</a> </td>
+                                                @endif
+                                                <td>{{ $user->num_documento }}</td>
+                                            @endif
 
                                             <td>
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="bi bi-eye"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="bi bi-pencil-square"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

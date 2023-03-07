@@ -33,7 +33,7 @@ class UserController extends Controller
         // dd($user);
         // $users = User::paginate();
 
-        return view('user.index', compact('users','tipo'))->with('i', 1);
+        return view('user.index', compact('users','tipo'))->with('i', 0);
     }
 
     public function create($tipo)
@@ -63,6 +63,11 @@ class UserController extends Controller
         $validacion['password'] = bcrypt($request->num_documento);
         User::create( $validacion );
 
+        //CREAMOS LAS RELACIONES EN LA TABLA INTERMEDIA
+        $usuario_creado = User::where('num_documento',$request->num_documento)->get();
+        $this->insertarTablaIntermedia( $usuario_creado[0]->id , $request->ciclos );
+
+        // REDIRIGIMOS A LA LISTA DE USUARIOS
         $tipo = 0;
         if ($request->role == 'alumno') {
             $tipo = 'alumno';
@@ -71,10 +76,17 @@ class UserController extends Controller
             $tipo = 'profesor';
         }
 
-        // return redirect()->route('users.index')
-        //     ->with('success', 'User created successfully.');
-            return redirect()->route('users.index',$tipo)->with('success', Str::upper($request->role).' añadido con exito');
+        return redirect()->route('users.index',$tipo)
+        ->with('success', Str::upper($request->role).' añadido con exito');
 
+    }
+
+    public function insertarTablaIntermedia($id_usuario ,$id_ciclo){
+
+        $coleccion_ciclos = Ciclo::find($id_ciclo);
+        $usuario = User::findOrFail($id_usuario);
+
+        $usuario -> ciclos() -> attach($coleccion_ciclos);
     }
 
     public function show($id)
