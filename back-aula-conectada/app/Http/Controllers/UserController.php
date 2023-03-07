@@ -51,18 +51,18 @@ class UserController extends Controller
     {
         if ($request->role == 'alumno') {
             request()->merge([
-                "email"=>request()->email .= "@alu.edu.gva.es",
+                "email" => request()->email .= "@alu.edu.gva.es",
             ]);        }
         else{
             request()->merge([
-                "email"=>request()->email .= "@edu.gva.es",
+                "email" => request()->email .= "@edu.gva.es",
             ]);
         }
-        // dd(request());
+
         $validacion = request()->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'apellido1' => 'required',
+            'apellido1' => 'required | max:50',
             'apellido2' => 'max:50',
             'role' => 'required|in:alumno,profesor,administrador',
             'tipo_documento' => 'required | required|in:DNI,NIA',
@@ -111,20 +111,13 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        if ($user->role == 'alumno') {
-            $tipo = 'alumno';
-        }
-        else{
-            $tipo = 'profesor';
-        }
         $ciclos = Ciclo::all();
-        // dd($user->ciclos);
-        return view('user.edit', compact('user','tipo','ciclos'));
+
+        return view('user.edit', compact('user','ciclos'));
     }
 
     public function update(Request $request, User $user)
     {
-        
         // dd($request);
         $validacion = request()->validate([
             'name' => 'required',

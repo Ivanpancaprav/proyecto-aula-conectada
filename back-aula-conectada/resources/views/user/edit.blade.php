@@ -13,7 +13,13 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update {{$user->role}}</span>
+                        <h1>
+                            @if ($user->role == 'alumno')  
+                                <span class="card-title">Editar Alumno</span>
+                            @else
+                                <span class="card-title">Editar Profesor</span>
+                            @endif
+                        </h1>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.update', $user) }}"  role="form" enctype="multipart/form-data">
@@ -52,7 +58,7 @@
                                         {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
 
-                                    @if ( $tipo == 'alumno' )
+                                    @if ( $user->role == 'alumno' )
                                         {{-- USUARIO ALUMNO --}}
                                         <input type="hidden" name="role" value="alumno">
                                         <input type="hidden" name="tipo_documento" value="NIA">
@@ -154,6 +160,11 @@
                                 <br>
                                 <div class="box-footer mt20">
                                     <button type="submit" class="btn btn-primary">Submit</button>
+                                    @if ($user->role == 'alumno')  
+                                        <a class="btn btn-danger " href="{{ route('users.index','alumno') }}">Cancelar</a>
+                                    @else
+                                        <a class="btn btn-danger " href="{{ route('users.index','profesor') }}">Cancelar</a>
+                                    @endif
                                 </div>
                             </div>
 

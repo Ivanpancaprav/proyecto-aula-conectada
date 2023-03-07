@@ -21,7 +21,9 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Crear {{$tipo}}</span>
+                        <h1>
+                            <span class="card-title">Crear {{$tipo}}</span>
+                        </h1>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}"  role="form" enctype="multipart/form-data">
@@ -148,6 +150,7 @@
                                 <br>
                                 <div class="box-footer mt20">
                                     <button type="submit" class="btn btn-primary">Submit</button>
+                                    <a class="btn btn-danger " href="{{ route('users.index',$tipo) }}">Cancelar</a>
                                 </div>
                             </div>
 
