@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\MonitorController;
 use App\Http\Controllers\API\PerfilMonitorController;
 use App\Http\Controllers\API\EspacioDidacticoController;
-
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,3 +42,11 @@ Route::get('/ver_espacio_didactico/{id_espacio}', [EspacioDidacticoController::c
 Route::post('/crear_espacio_didactico',[EspacioDidacticoController::class,'create']);
 Route::delete('/borrar_espacio_didactico/{id_espacio}',[EspacioDidacticoController::class,'borrar_perfil']);
 Route::put('/update_espacio_didactico', [EspacioDidacticoController::class,'update_perfil']); 
+
+
+// RUTAS USUARIOS
+Route::get('/profesores', [UserController::class, 'indexProfesores']);
+Route::get('/alumnos', [UserController::class, 'indexAlumnos']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/user/{id}/restore', [UserController::class, 'restorePassword']);
+Route::put('/user/edit/{id}', [UserController::class, 'editPassword']);

@@ -6,11 +6,9 @@ use App\Models\Ciclo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
-/**
- * Class UserController
- * @package App\Http\Controllers
- */
+
 class UserController extends Controller
 {
 
@@ -38,19 +36,33 @@ class UserController extends Controller
 
     public function create($tipo)
     {
-        // dd($tipo);
+        if ($tipo == 'alumno') {
+            $extension_email = "@alu.edu.gva.es";
+        }
+        else{
+            $extension_email = "@edu.gva.es";
+        }
         $user = new User();
         $ciclos = Ciclo::all();
-        return view('user.create', compact('user','tipo','ciclos'));
+        return view('user.create', compact('user','tipo','ciclos','extension_email'));
     }
 
     public function store(Request $request)
     {
-        // dd($request);
+        if ($request->role == 'alumno') {
+            request()->merge([
+                "email" => request()->email .= "@alu.edu.gva.es",
+            ]);        }
+        else{
+            request()->merge([
+                "email" => request()->email .= "@edu.gva.es",
+            ]);
+        }
+
         $validacion = request()->validate([
             'name' => 'required',
-            'email' => 'required|email| unique:users,email',
-            'apellido1' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'apellido1' => 'required | max:50',
             'apellido2' => 'max:50',
             'role' => 'required|in:alumno,profesor,administrador',
             'tipo_documento' => 'required | required|in:DNI,NIA',
@@ -99,18 +111,56 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $ciclos = Ciclo::all();
 
-        return view('user.edit', compact('user'));
+        return view('user.edit', compact('user','ciclos'));
     }
 
     public function update(Request $request, User $user)
     {
-        request()->validate(User::$rules);
+        // dd($request);
+        $validacion = request()->validate([
+            'name' => 'required',
+            'email'=>[
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->email,'email'),
+            ],            
+            'apellido1' => 'required',
+            'apellido2' => 'max:50',
+            'password' => 'required|min:6',
+            'role' => 'required|in:alumno,profesor,administrador',
+            'tipo_documento' => 'required | required|in:DNI,NIA',
+            'num_documento'=>[
+                'required',
+                'max:20',
+                Rule::unique('users')->ignore($user->num_documento,'num_documento'),
+            ],
+            'ciclos' => 'required',
+        ]);
 
-        $user->update($request->all());
+        if ($validacion['password'] != $user->password) { // Si hay diferencias
+            $validacion['password'] = bcrypt( request()->password ); // Encriptamos la contraseña
+        }// sino, no hacemos nada para no encriptar la contraseña ya encriptada
 
-        return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+        // $user->update($request->all());
+        User::find($user->id)->update($validacion);
+        User::find($user->id)->ciclos()->sync( $request->ciclos );
+
+        // return redirect()->route('users.index')
+        //     ->with('success', 'User updated successfully');
+
+        // REDIRIGIMOS A LA LISTA DE USUARIOS
+        $tipo = 0;
+        if ($request->role == 'alumno') {
+            $tipo = 'alumno';
+        }
+        else{
+            $tipo = 'profesor';
+        }
+
+        return redirect()->route('users.index',$tipo)
+        ->with('success', Str::upper($request->role).' añadido con exito');
     }
 
     public function destroy($id)
