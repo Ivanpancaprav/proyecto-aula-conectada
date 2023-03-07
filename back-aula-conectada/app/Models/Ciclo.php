@@ -23,6 +23,6 @@ class Ciclo extends Model
     }
 
     public function espacios() {
-        return $this->belongsToMany(User::class, 'espacios_ciclos',"id_user", "id_espacio");
+        return $this->belongsToMany(Espacio_Didactico::class, 'espacios_ciclos',"id_espacio", "id_ciclo");
     }
 }

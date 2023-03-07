@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('perfiles_monitor', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('nombre')->unique();
             $table->integer('FC');
             $table->integer('CO2');
             $table->integer('TA_D');
