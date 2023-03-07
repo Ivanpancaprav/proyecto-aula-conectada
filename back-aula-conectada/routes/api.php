@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\MonitorController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,12 @@ Route::post('/crea_monitor',[MonitorController::class,'create']);
 Route::delete('/borra_monitor/{id_monitor}',[MonitorController::class,'borra_monitor']);
 Route::put('/update_monitor/{id_monitor}', [MonitorController::class, 'update_monitor']);
 Route::get('/verMonitor', [MonitorController::class,'verMonitor']); 
+
+// RUTAS USUARIOS
+Route::get('/profesores', [UserController::class, 'indexProfesores']);
+Route::get('/alumnos', [UserController::class, 'indexAlumnos']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/user/{id}/restore', [UserController::class, 'restorePassword']);
+Route::put('/user/edit/{id}', [UserController::class, 'editPassword']);
+
+?>
