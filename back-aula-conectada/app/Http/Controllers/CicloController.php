@@ -43,8 +43,11 @@ class CicloController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(['siglas'=>'required|max:5','nombre'=>'required|max:50|min:1']);
+        
+        request()->validate(['siglas'=>'required|max:8','nombre'=>'required|max:50|min:1','curso'=>'required']);
 
+        request()->merge(['siglas'=> request()->curso .=request()->siglas]);
+        
         $ciclo = Ciclo::create($request->all());
 
         return redirect()->route('ciclos.index')

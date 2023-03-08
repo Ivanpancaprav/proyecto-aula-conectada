@@ -6,9 +6,31 @@
 
 	- Necesitamos saber como funcionas las ondas de la gráfica. Qué parámetros necesitamos y cuáles varían dependiendo del estado del paciente. Explique porfa
 
-	- Cuantos monitores puede crear un profesor? Sólo lo crea el profesor? O el alumno también puede? 
+	- Sólo lo crea el profesor? O el alumno también puede? 
 
 	- Datos a almacenar del usuario??
 
 	- Explicar cómo serán los espacios didácticos. 
 	
+
+
+
+Respuestas, resultado del a reunión:
+
+
+Monitor: Sato2: NO TIENE REPERCUSIÓN EN EL ELECTROCARDIO Y TENSION : VARÍAN EN EL MONITOR, SÓLO EL VALOR. LO VA A MIRAR, TENEMOS QUE ESPERAR.
+
+
+Alumno:El alumno puede editar contenido de los espacios didácticos, también puede crear espacios didácticos.
+
+profesor:  Poner estado, confirmado no confirmado,también a la hora de editar un espacio didáctico volverá al estado pendiente de confirmación., previamente antes de publicar el espacio didáctico un profesor lo debe validar.
+
+Cuando registramos un alumno le asignamos directamente un ciclo. 
+
+
+*CENTROS* : Poner una nueva tabla donde se almacenen los usuarios de determinado centro, así filtrarlo, ya que esta aplicación la usarán varios centros. 
+
+
+
+
+

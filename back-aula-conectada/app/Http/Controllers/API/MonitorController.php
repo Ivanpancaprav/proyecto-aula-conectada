@@ -14,7 +14,8 @@ class MonitorController extends Controller{
     //BUSCA EN LA BASE DE DATOS SI ESE CÓDIGO YA EXISTE, EN EL CASO DE QUE EXISTA VUELVE A 
     //GENERAR OTRO CÓDIGO PARA QUE NÚNCA COINCIDA CON UNO YA EXISTENTE.
     
-    public function create(Request $request){
+    public function create()
+    {
         
         $codigo =0;
         
@@ -30,6 +31,8 @@ class MonitorController extends Controller{
         }while($existe);
         
         Monitor::create(['codigo' => $numRandom,'id_user' => 0]);
+
+        //TODO -> CUANDO SE CREE EL MONITOR, HAY QUE ASIGNARLE LA RELACIÓN CON LOS PERFILES PREDEFINIDOS
     }
 
     //ESTA FUNCIÓN BUSCA UN MONITOR POR SU CÓDIGO.

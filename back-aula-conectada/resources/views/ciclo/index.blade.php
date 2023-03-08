@@ -30,6 +30,7 @@
                     @endif
 
                     <div class="card-body">
+                        
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
@@ -50,14 +51,10 @@
 											<td>{{ $ciclo->nombre }}</td>
 											<td>{{ $ciclo->siglas }}</td>
 
-                                            <td>
-                                                <form action="{{ route('ciclos.destroy',$ciclo->id) }}" method="POST">
+                                            <td> 
                                                     <a class="btn btn-sm btn-primary " href="{{ route('ciclos.show',$ciclo->id) }}"><i class="bi bi-eye"></i></a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('ciclos.edit',$ciclo->id) }}"><i class="bi bi-pencil-square"></i></a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
-                                                </form>
+                                                    <a href="#" id="{!! $ciclo->nombre!!}" onclick="borrar({!! $ciclo->id !!}, this);" class="btn btn-sm btn-danger"><i class="fa fa-times"></i> <i class="bi bi-trash3"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('ciclos.edit',$ciclo->id) }}"><i class="bi bi-pencil-square"></i></a>                 
                                             </td>
                                         </tr>
                                     @endforeach
@@ -70,4 +67,59 @@
             </div>
         </div>
     </div>
+  
+<script>
+
+function borrar(id, obj)
+        {
+            $.confirm({
+                title: 'Atención!',
+                content: '¿Estas seguro que quieres borrar el ciclo <strong>'+$(obj).attr('id')+'</strong>?',
+                buttons: {
+                    confirmar: function () {
+                        $.ajax(
+                        {
+                            url: {{ route('ciclo.destroy',id) }},
+                            type: 'DELETE',
+                            retrieve:true,
+                            dataType: "JSON",
+                            data: {
+                                "id": id,
+                                "_method": 'DELETE'
+                            },
+                            success: function (result)
+                            {
+                                $.alert({
+                                    title: '',
+                                    content: result.msjrespuesta,
+                                    buttons:{
+                                        aceptar: {
+                                            text: 'Aceptar',
+                                            action: function ()
+                                            {
+                                                if (result.resultado == 'bien'){
+                                                    document.location.href = "{{url('/registros')}}";
+                                                };
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    cancelar: function () {
+                        $.alert({
+                            title: '',
+                            content: 'Borrado cancelado',
+                            buttons:{
+                                aceptar: {
+                                    text: 'Aceptar'
+                                }
+                            }
+                        });
+            }
+                }
+            });
+        };
+</script>
 @endsection
