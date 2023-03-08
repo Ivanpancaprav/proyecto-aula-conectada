@@ -19,7 +19,7 @@ class Ciclo extends Model
     ];
 
     public function usuarios() {
-        return $this->belongsToMany(User::class, 'ciclos_usuarios',"id_user", "id_ciclo");
+        return $this->belongsToMany(User::class, 'ciclos_usuarios',"id_ciclo", "id_user",);
     }
 
     public function espacios() {
