@@ -56,8 +56,11 @@ class UserController extends Controller
         else{
             request()->merge([
                 "email" => request()->email .= "@edu.gva.es",
+                "num_documento" =>Str::upper(request()->num_documento)
             ]);
         }
+
+        // dd($request);
 
         $validacion = request()->validate([
             'name' => 'required',
@@ -125,7 +128,7 @@ class UserController extends Controller
                 'required',
                 'email',
                 Rule::unique('users')->ignore($user->email,'email'),
-            ],            
+            ],
             'apellido1' => 'required',
             'apellido2' => 'max:50',
             'password' => 'required|min:6',
