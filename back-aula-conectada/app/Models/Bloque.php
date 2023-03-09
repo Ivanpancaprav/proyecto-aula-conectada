@@ -13,7 +13,8 @@ class Bloque extends Model
 
     protected $fillable = [
         'descripcion',
-        'titulo',   
+        'titulo',
+        'id_espacio',
     ];
 
 
@@ -27,7 +28,7 @@ class Bloque extends Model
         return $this->hasMany(Documento::class,'id_bloque','id');
     }
 
-    
+
 
     use HasFactory;
 
