@@ -15,7 +15,9 @@ return new class extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('siglas',8);
-            
+
+            // $table->integer('id_centro')->unsigned();
+            // $table->foreign('id_centro')->references('id')->on('centros')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }

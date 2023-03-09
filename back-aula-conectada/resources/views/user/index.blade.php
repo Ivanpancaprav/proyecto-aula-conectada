@@ -17,7 +17,7 @@
                                         {{ __('Lista Alumnos') }}
                                     @else
                                         {{ __('Lista Profesores') }}
-                                    @endif                            
+                                    @endif
                                 </span>
                             </h1>
                              <div class="float-right">
@@ -51,7 +51,7 @@
                                         @if ( $tipo == 'alumno')
                                             <th>NIA</th>
                                             <th>Ciclo</th>
-                                        @else {{-- Profesor/Administrador --}}                        
+                                        @else {{-- Profesor/Administrador --}}
                                             <th>Admin</th>
                                             <th>DNI</th>
                                         @endif
@@ -71,8 +71,8 @@
                                                 <td>{{ $user->num_documento }}</td>
                                                 <td>{{ $user->ciclos[0]->siglas }}</td>
 
-                                            @else       
-                                            
+                                            @else
+
                                                 @if ($user->role == 'administrador')
                                                     <td><i class="bi bi-check-square-fill" style="color: green"><a
                                                                 style="visibility: hidden">1</a></td>
@@ -87,36 +87,36 @@
                                                 <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="bi bi-eye"></i></a>
                                                 <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="bi bi-pencil-square"></i></a>
                                                 <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$i}}">
                                                     <i class="bi bi-trash3"></i>
                                                 </button>
 
                                                 <!-- PANTALLA DE CONFIRMACION -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModal{{$i}}">
                                                     <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            ¿Desea eliminar este usuario <strong>{{$user->email}}</strong>?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-body">
-                                                        ¿Desea eliminar este usuario <strong>{{$user->email}}</strong>?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
 
-                                    @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -126,14 +126,6 @@
         </div>
     </div>
     <br>
+
 @endsection
 
-<script>
-    const myModal = document.getElementById('myModal')
-    const myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', () => {
-        myInput.focus()
-    })
-
-</script>
