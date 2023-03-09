@@ -53,9 +53,36 @@
 
                                             <td>
                                                     <a class="btn btn-sm btn-primary " href="{{ route('ciclos.show',$ciclo->id) }}"><i class="bi bi-eye"></i></a>
-                                                    <a href="#" id="{!! $ciclo->id !!}" onclick="borrar({!! $ciclo->id !!}, this);" name="{{$ciclo->nombre}}" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i><i class="bi bi-trash3"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('ciclos.edit',$ciclo->id) }}"><i class="bi bi-pencil-square"></i></a>                 
-                                            </td>
+                                            
+                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$i}}">
+                                                        <i class="bi bi-trash3"></i>
+                                                    </button>
+    
+                                                    <!-- PANTALLA DE CONFIRMACION -->
+                                                    <div class="modal fade" id="exampleModal{{$i}}">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                ¿Desea eliminar este ciclo <strong>{{$ciclo->nombre}}</strong>?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form action="{{ route('ciclos.destroy',$ciclo->id) }}" method="POST">
+                                                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>    
+                                        
+                                                </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\DocumentoController;
 use App\Http\Controllers\CicloController;
 use App\Http\Controllers\PerfilesMonitorController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,11 @@ Route::resource('perfiles-monitor',PerfilesMonitorController::class);
 Route::resource('users', UserController::class)->except(['create', 'index']);
 Route::get("/index/{tipo}",[UserController::class, 'index'])->name('users.index');
 Route::get("/users/create/{tipo}",[UserController::class, 'create'])->name('users.create');
+
+
+
+//RUTAS PRUEBAS FICHEROS
+Route::view('/subir','pds')->name('subir');   
+//va directamente a la vista, no hace falta poner controlador
+
+Route::post('/subidoFichero',[DocumentoController::class,'create'])->name('subidoFicheroPost');
