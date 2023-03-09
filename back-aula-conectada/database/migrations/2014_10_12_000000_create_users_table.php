@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('role',['administrador','profesor','alumno'])->default('alumno');
             $table->enum('tipo_documento',['NIA','DNI'])->default('NIA');
             $table->string('num_documento')->unique();
+            $table->rememberToken();
 
         });
     }

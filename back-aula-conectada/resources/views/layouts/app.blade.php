@@ -71,17 +71,6 @@
                                 </li>
                             @endif
 
-                            {{-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif --}}
-
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">{{ __('Alumnos') }}</a>
-                            </li> --}}
-
-
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -89,15 +78,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                            
+                                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal-LOGOUT">
+                                        <i class="bi bi-power"></i>
+                                        {{ __('Logout') }} 
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                 </div>
                             </li>
                         @endguest
@@ -107,6 +93,28 @@
         </nav>
 
         <main class="py-4">
+            <!-- PANTALLA DE CONFIRMACION -->
+            <div class="modal fade" id="exampleModal-LOGOUT">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        ¿Estas seguro de cerrar sesion?
+                        </div>
+                        <div class="modal-footer">
+
+                            <form action="{{ route('logout') }}" method="POST">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Si</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @yield('content')
         </main>
     </div>
