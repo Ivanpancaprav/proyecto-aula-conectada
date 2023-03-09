@@ -16,9 +16,7 @@
 <form action="{{ route('subidoFicheroPost')}}" method="post" enctype="multipart/form-data">
     @csrf
 
-    <input type="text" name="nombre">
- 
-    
+    <input type="text" name="nombre">    
 
         <input type="file" name="archivo" id="exampleInputFile" aria-describedby="fileHelp">
         <small id="fileHelp">El tamaño del fichero no debe ser superior a 2 MB.</small>
@@ -27,6 +25,8 @@
             <option value="video">Video</option>
             <option value="pdf">Pdf</option>
         </select>
+
+        <input type="text" name="url" id="" placeholder="url">
         <input type="hidden" name="id_bloque" value="1">
     <button type="submit">Subir</button>
 

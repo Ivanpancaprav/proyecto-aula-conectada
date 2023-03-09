@@ -16,6 +16,7 @@ return new class extends Migration
             $table->increments('id');
             $table->enum('extension',['video','pdf','imagen']);
             $table->string('nombre');
+            $table->string('url');
             $table->integer('id_bloque')->unsigned();
             $table->foreign('id_bloque')->references('id')->on('bloques')->onUpdate('cascade')->onDelete('cascade');
         });
