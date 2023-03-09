@@ -5,6 +5,8 @@ use App\Http\Controllers\API\MonitorController;
 use App\Http\Controllers\API\PerfilMonitorController;
 use App\Http\Controllers\API\EspacioDidacticoController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\BloqueController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -60,3 +62,7 @@ Route::get('/ciclo/{id}/alumnos', [CicloController::class, 'alumnosCiclo']);
 Route::get('/ciclo/{id}/profesores', [CicloController::class, 'profesoresCiclo']);
 
 // RUTAS BLOQUES
+Route::get('/bloque/{id_espacio}', [BloqueController::class, 'bloquesEspacios']);
+Route::put('/bloque/update/{id}', [BloqueController::class,'update']);
+Route::delete('/bloque/{id}',[BloqueController::class,'delete']);
+Route::post('/bloque/almacenar', [BloqueController::class, 'almacenar']);
