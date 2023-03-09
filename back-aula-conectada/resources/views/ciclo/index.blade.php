@@ -51,9 +51,9 @@
 											<td>{{ $ciclo->nombre }}</td>
 											<td>{{ $ciclo->siglas }}</td>
 
-                                            <td> 
+                                            <td>
                                                     <a class="btn btn-sm btn-primary " href="{{ route('ciclos.show',$ciclo->id) }}"><i class="bi bi-eye"></i></a>
-                                                    <a href="#" id="{!! $ciclo->nombre!!}" onclick="borrar({!! $ciclo->id !!}, this);" class="btn btn-sm btn-danger"><i class="fa fa-times"></i> <i class="bi bi-trash3"></i></a>
+                                                    <a href="#" id="{!! $ciclo->id !!}" onclick="borrar({!! $ciclo->id !!}, this);" name="{{$ciclo->nombre}}" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i><i class="bi bi-trash3"></i></a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('ciclos.edit',$ciclo->id) }}"><i class="bi bi-pencil-square"></i></a>                 
                                             </td>
                                         </tr>
@@ -68,58 +68,4 @@
         </div>
     </div>
   
-<script>
-
-function borrar(id, obj)
-        {
-            $.confirm({
-                title: 'Atención!',
-                content: '¿Estas seguro que quieres borrar el ciclo <strong>'+$(obj).attr('id')+'</strong>?',
-                buttons: {
-                    confirmar: function () {
-                        $.ajax(
-                        {
-                            url: {{ route('ciclo.destroy',id) }},
-                            type: 'DELETE',
-                            retrieve:true,
-                            dataType: "JSON",
-                            data: {
-                                "id": id,
-                                "_method": 'DELETE'
-                            },
-                            success: function (result)
-                            {
-                                $.alert({
-                                    title: '',
-                                    content: result.msjrespuesta,
-                                    buttons:{
-                                        aceptar: {
-                                            text: 'Aceptar',
-                                            action: function ()
-                                            {
-                                                if (result.resultado == 'bien'){
-                                                    document.location.href = "{{url('/registros')}}";
-                                                };
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    },
-                    cancelar: function () {
-                        $.alert({
-                            title: '',
-                            content: 'Borrado cancelado',
-                            buttons:{
-                                aceptar: {
-                                    text: 'Aceptar'
-                                }
-                            }
-                        });
-            }
-                }
-            });
-        };
-</script>
 @endsection

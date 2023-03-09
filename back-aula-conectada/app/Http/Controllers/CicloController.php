@@ -103,6 +103,7 @@ class CicloController extends Controller
      */
     public function destroy($id)
     {
+        
         $ciclo = Ciclo::find($id)->delete();
 
         return redirect()->route('ciclos.index')
