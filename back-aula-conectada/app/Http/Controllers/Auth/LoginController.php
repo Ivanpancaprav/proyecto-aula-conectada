@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,43 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {        
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $credentials = $request->except(['_token']);  //no cogemos el token
+
+         if (auth()->attempt($credentials)) {  //comprobación de autenticación
+
+            //Comprobar si el usuario es administrador
+            if(auth()->user()->role == "administrador"){
+
+                return redirect()->route('home');  //nos redirije a la ruta 'admin'
+            }
+            else{
+
+                Auth::logout(); // estamos logeados previamente, entonces nos deslogeamos
+
+                session()->flash('message', 'Disabled User');
+                return redirect()->back();
+            }
+
+
+        } else {
+            session()->flash('message', 'Invalid credentials');
+            return redirect()->back();
+        }
+    }
+
+    public function logout(Request $request){
+        
+        $request->session()->flush();
+        Auth::logout();
+        return redirect('login');
     }
 }

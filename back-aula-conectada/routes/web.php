@@ -30,12 +30,18 @@ Route::resource('ciclos',CicloController::class);
 Route::resource('perfiles-monitor',PerfilesMonitorController::class);
 
 // RUTAS - USERS
-// Route::resource('users', UserController::class)->except(['create']);
 Route::resource('users', UserController::class)->except(['create', 'index']);
 Route::get("/index/{tipo}",[UserController::class, 'index'])->name('users.index');
 Route::get("/users/create/{tipo}",[UserController::class, 'create'])->name('users.create');
 
 
 //RUTAS PRUEBAS FICHEROS
-Route::view('/subir','pds')->name('subir');
+Route::view('/subir','pds')->name('subir');   
+//va directamente a la vista, no hace falta poner controlador
 Route::post('/subidoFichero',[DocumentoController::class,'create'])->name('subidoFicheroPost');
+
+
+// LOGIN FUNCIONAL CON RESTRICCION DE ACCESO A USUARIOS ADMINISTRADORES
+Route::group(['middleware'=>'auth'],function(){
+    
+});
