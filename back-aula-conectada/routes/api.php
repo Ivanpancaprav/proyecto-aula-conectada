@@ -41,13 +41,8 @@ Route::get('/ver_perfil/{id_perfil}', [PerfilMonitorController::class,'ver_perfi
 Route::get('/ver_espacios_por_ciclo/{id_usuario}',[EspacioDidacticoController::class,'ver_espacios_por_ciclo']);
 Route::get('/ver_espacio_didactico/{id_espacio}', [EspacioDidacticoController::class,'ver_espacio_didactico']);
 Route::post('/crear_espacio_didactico',[EspacioDidacticoController::class,'create']);
-<<<<<<< HEAD
 Route::delete('/borrar_espacio_didactico/{id_espacio}',[EspacioDidacticoController::class,'borrar_espacio_didactico']);
-Route::put('/update_espacio_didactico', [EspacioDidacticoController::class,'update_espacio_didactico']); 
-=======
-Route::delete('/borrar_espacio_didactico/{id_espacio}',[EspacioDidacticoController::class,'borrar_perfil']);
-Route::put('/update_espacio_didactico', [EspacioDidacticoController::class,'update_perfil']);
->>>>>>> 6c48c1d68f7b0f23264e90936a98ea755a639f96
+Route::put('/update_espacio_didactico', [EspacioDidacticoController::class,'update_espacio_didactico']);
 
 
 // RUTAS USUARIOS
