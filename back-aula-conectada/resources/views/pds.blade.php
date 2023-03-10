@@ -5,17 +5,15 @@
 @if (count($errors) > 0)
 <div>
     <strong>Uppss!</strong> Hay algunos problemas en la subida.<br><br>
-  
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
         @endforeach
-  
 </div>
 @endif
 
 <form action="{{ route('subidoFicheroPost')}}" method="post" enctype="multipart/form-data">
+   
     @csrf
-
     <input type="text" name="nombre">    
 
         <input type="file" name="archivo" id="exampleInputFile" aria-describedby="fileHelp">

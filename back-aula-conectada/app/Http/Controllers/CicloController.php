@@ -32,7 +32,8 @@ class CicloController extends Controller
     public function create()
     {
         $ciclo = new Ciclo();
-        return view('ciclo.create', compact('ciclo'));
+        $curso =1;
+        return view('ciclo.create', compact('ciclo','curso'));
     }
 
     /**
@@ -43,11 +44,11 @@ class CicloController extends Controller
      */
     public function store(Request $request)
     {
-        
-        request()->validate(['siglas'=>'required|max:8','nombre'=>'required|max:50|min:1','curso'=>'required']);
 
-        request()->merge(['siglas'=> request()->curso .=request()->siglas]);
-        
+        request()->validate(['siglas' => 'required|max:8', 'nombre' => 'required|max:50|min:1', 'curso' => 'required']);
+
+        request()->merge(['siglas' => request()->curso .= request()->siglas]);
+
         $ciclo = Ciclo::create($request->all());
 
         return redirect()->route('ciclos.index')
@@ -77,7 +78,17 @@ class CicloController extends Controller
     {
         $ciclo = Ciclo::find($id);
 
-        return view('ciclo.edit', compact('ciclo'));
+
+        if(substr($ciclo->siglas,0,1) == "2"){
+            $curso = 2;
+        }else{
+            $curso = 1;
+        }
+
+        $ciclo->siglas = substr($ciclo->siglas,2);
+       
+    
+        return view('ciclo.edit', compact('ciclo','curso'));
     }
 
     /**
@@ -89,7 +100,9 @@ class CicloController extends Controller
      */
     public function update(Request $request, Ciclo $ciclo)
     {
-        request()->validate(['siglas'=>'required|max:5','nombre'=>'required|max:50|min:1']);
+        request()->validate(['siglas' => 'required|max:8', 'nombre' => 'required|max:50|min:1', 'curso' => 'required']);
+
+        request()->merge(['siglas' => request()->curso .= request()->siglas]);
 
         $ciclo->update($request->all());
 
@@ -103,7 +116,7 @@ class CicloController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $ciclo = Ciclo::find($id)->delete();
 
         return redirect()->route('ciclos.index')

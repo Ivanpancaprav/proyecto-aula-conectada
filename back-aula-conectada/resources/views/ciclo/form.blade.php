@@ -13,15 +13,29 @@
             {{ Form::text('siglas', $ciclo->siglas, ['class' => 'form-control' . ($errors->has('siglas') ? ' is-invalid' : ''), 'placeholder' => 'Siglas']) }}
             {!! $errors->first('siglas', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
+
         <div class="form-group">
             <div class="form-check">
+                @if ($curso == 1)
+                <input checked class="form-check-input" type="radio" name="curso" value="1_" id="flexRadioDefault1">
+
+                @else
                 <input class="form-check-input" type="radio" name="curso" value="1_" id="flexRadioDefault1">
+                    
+                @endif
                 <label class="form-check-label" for="flexRadioDefault1">
                   1º Curso
                 </label>
+
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="curso" value="2_" id="flexRadioDefault2" checked>
+                @if($curso == 2)
+                <input checked class="form-check-input" type="radio" name="curso" value="2_" id="flexRadioDefault2" >
+                @else
+                <input class="form-check-input" type="radio" name="curso" value="2_" id="flexRadioDefault2" >
+
+                @endif
                 <label class="form-check-label" for="flexRadioDefault2">
                     2º Curso
                 </label>

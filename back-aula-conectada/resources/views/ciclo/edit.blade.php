@@ -11,6 +11,7 @@
 
                 @includeif('partials.errors')
 
+                
                 <div class="card card-default">
                     <div class="card-header d-flex justify-content-between ">
                         <span class="card-title">Editar Ciclo</span>
