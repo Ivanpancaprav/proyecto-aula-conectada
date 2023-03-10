@@ -1,0 +1,10 @@
+*{
+  border: 1px solid black;
+}
+
+#nav{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
